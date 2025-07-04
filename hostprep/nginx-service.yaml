@@ -1,8 +1,9 @@
-# Expose the Nginx deployment on a NodePort 32000
+# Expose the Nginx deployment on a NodePort 32000 in nginx namespace
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
+  namespace: nginx
 spec:
   selector: 
     app: nginx
