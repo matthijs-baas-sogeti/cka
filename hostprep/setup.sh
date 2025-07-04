@@ -1,3 +1,14 @@
+# prep VM with basics
+sudo echo 'matt ALL=(ALL:ALL) ALL' | sudo tee /etc/sudoers.d/matt
+sudo chmod 0440 /etc/sudoers.d/matt
+
+# add ssh key
+sudo echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzzTtECT9OHdQr/sYKOomho9152Jan/+PHtghsvlo5bdDi0owK24eTWtj8JbYVfDidQyJ7+gD2LdzaCO9jMegviLZPoevb1tyVcn+itslSTzJJPy6DCokbny8PXuX3B3DCvDgLzgmESrhSYY8D6S+8pMNbNvDusmsPSnHY0608VWyqC5z95ROCWSe3wk7CMkd4MRuPV6eqWXL9PKffExKCTYP2I3A4f62ovHYCzxJdbh9qyuLv9ZmZ68ewIi5pJ4UqP+DBTH1CpL77TVSPpQD5rJYjD/HLRNHfuMnTgeB3I2APjfAZ7C3qznhrIAWEs9M1IC8x0XkTb3ZC3b0PWdVjUtURVOUp/5ayTBLRz0Gd08r1vXGDqaz7Ttg6MaDH4L07kkln/ylvXZMrGkV2zeV/HQjmER1/XAhraVsRHH+DcE6nSIBn75K9KzrR5LV1Eivexnb0t6ufzptni2Ql5NmJsV4ditdHlxfY4/z0IrFU1vt1bUaZZC35U6N7rAZDjv0= mattlpt@mattlpt'  | sudo tee -a /home/matt/.ssh/authorized_keys
+
+# update
+sudo apt update && apt upgrade -y
+sudo apt autoremove -y
+
 # Run on all the nodes for IPtables to see bridged traffic
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
