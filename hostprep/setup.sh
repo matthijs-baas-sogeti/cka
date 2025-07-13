@@ -1,5 +1,6 @@
 # prep VM with basics
 sudo echo 'matt ALL=(ALL:ALL) ALL' | sudo tee /etc/sudoers.d/matt
+sudo usermod -aG sudo matt
 sudo chmod 0440 /etc/sudoers.d/matt
 
 # add ssh key
@@ -28,7 +29,8 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 
-# For kubeadm to work properly, disable swap
+# For kubeadm to work properly, disable swap ( on root user! as it requires root to turn it off )
+# manual: crontab -e > @reboot swapoff -a
 sudo swapoff -a
 (crontab -l 2>/dev/null; echo "@reboot /sbin/swapoff -a") | crontab - || true
 
